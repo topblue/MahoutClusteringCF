@@ -2,11 +2,11 @@ package bigram.cf.logisticRegression;
 
 public class NameBeans {
 
-	public String rawDomain = "data/domain.txt";	//要處理的檔案名稱，檔案格式只有domain name名稱
-	public String bigramSparseMatrix = "data/bigramOutput.txt";	//計算好的陣列名稱
-	public String dictionaryFilename = "data/dictionary.txt";	//字典資料記錄
-	public String bigramCFresult = "data/bigramOutput_CF.txt";
-	public String bigramCFToClustering = "data/bigramOutput_Clustering.txt";
+	public String rawDomain = "";	//要處理的檔案名稱，檔案格式只有domain name名稱
+	public String bigramSparseMatrix = "";	//計算好的陣列名稱
+	public String dictionaryFilename = "";	//字典資料記錄
+	public String bigramCFresult = "";
+	public String bigramCFToClustering = "";
 	
 	public Integer getMainDNIndex = 2;		//取最後倒數第二個，就是不娶tw,com,net，這個的前一個。www.google.com，只取google，直就給2
 	public Integer ngramLimit = 2; //給2是2-gram
