@@ -31,9 +31,6 @@ public class Main_ForClustering {
 		toMatrix = sparseMatrixToMatrixMarke(beans.getBigramCFresult());
 		
 		makeDictionaryList(beans.getDictionaryFilename());
-//		System.out.println(beans.getDictionaryFilename());
-//		System.out.println(urlArr);
-
 		
 		String title = "";
 		for(int i=0; i<bigramArr.length();i++){
@@ -77,40 +74,34 @@ public class Main_ForClustering {
 		int i = 0;
 		while(br.ready()){
 			String line = br.readLine();
-//			System.out.println("dictionary順序："+i);
 			try{
 				if(i==1){
-//					System.out.println("i==1  dictionary順序："+i);
-					bigramArr = new JSONArray();
-					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
-					String[] strcom = lineRep.split(",");
-					bigramArr = new JSONArray();
-					for(int j = 0;j<strcom.length;j++){
-//						System.out.println();
-						bigramArr.put(strcom[j].replaceAll(" ", ""));
-					}
+					bigramArr = new JSONArray(line);
+//					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
+//					String[] strcom = lineRep.split(",");
+//					bigramArr = new JSONArray();
+//					for(int j = 0;j<strcom.length;j++){
+//						bigramArr.put(strcom[j].replaceAll(" ", ""));
+//					}
 				}else if(i==4){
-//					System.out.println("i==4  dictionary順序："+i);
-					urlArr = new JSONArray();
-					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
-					String[] strcom = lineRep.split(",");
-					urlArr = new JSONArray();
-					for(int j = 0;j<strcom.length;j++){
-//						System.out.println();
-						urlArr.put(strcom[j].replaceAll(" ", ""));
-					}
+					urlArr = new JSONArray(line);
+//					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
+//					String[] strcom = lineRep.split(",");
+//					urlArr = new JSONArray();
+//					for(int j = 0;j<strcom.length;j++){
+//						urlArr.put(strcom[j].replaceAll(" ", ""));
+//					}
 				}else{
 					
 				}
 			}catch(Exception e){
+				//這段是出現錯誤的話寫入到檔案中
 				String str = "data/logs20141210_1221/temp/canDelte.temp";
 				bem.cleanFile(str);
 				String[] temstr = line.split(",");
 				for(int temi=0;temi<temstr.length;temi++){
 					bem.resultToWrite(str, temstr[temi]);
 				}
-//				System.out.println("問題："+e.getMessage());
-//				System.out.println(line);
 			}
 			i++;
 		}

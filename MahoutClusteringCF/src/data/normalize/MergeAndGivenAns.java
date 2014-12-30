@@ -9,22 +9,23 @@ import java.util.ArrayList;
 import bigram.cf.logisticRegression.BigramExpandMethod;
 
 public class MergeAndGivenAns {
-	String dga = "data/logs20141210_1221/raw/logs20141210_1221.txt.uniq";
-	String normal = "data/logs20141210_1221/raw/top-1m-onlyDomain.txt";
-//	String resultPath = "data/logs20141210_1221/20141210_1221_64.result";
-	String resultPath = "data/logs20141210_1221/raw/merge10tNormal2hDga.txt";
+	String filePath = "data/logs20141210_1221/";
+	String dga = filePath + "raw/logs20141210_1221.txt.uniq";
+//	String normal = filePath + "raw/top-1m-onlyDomain.txt";
+	String normal = filePath + "raw/top-1m-takeout-sign.uniq";
+	String resultPath = filePath + "mergeToRaw/merge-1hNormal-2tenDga.txt";
+	
 	BigramExpandMethod bem = new BigramExpandMethod();
 	
 	public static void main(String[] args) throws IOException {
-		int total = 2000;
-		int normalNum = (int) (total*0.6);
-		int dgaNum = 2000-normalNum;
+		int num_normal = 100;
+		int num_dga = 20;
 		MergeAndGivenAns mag = new MergeAndGivenAns();
 		ArrayList<String> arr = new ArrayList<String>();
-//		arr = mag.readFile(arr,mag.normal,"normal",normalNum);
-//		arr = mag.readFile(arr,mag.dga,"dga",dgaNum);
-		arr = mag.readFile(arr,mag.normal,"normal",10000);
-		arr = mag.readFile(arr,mag.dga,"dga",200);
+		
+		arr = mag.readFile(arr,mag.normal,"normal",num_normal);
+		arr = mag.readFile(arr,mag.dga,"dga",num_dga);
+		
 		mag.readArrayAndWriteToFile(arr);	//寫到檔案中
 		System.out.println(arr.size());
 	}
