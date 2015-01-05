@@ -1,5 +1,7 @@
 package bigram.cf.logisticRegression;
 
+import org.json.JSONArray;
+
 public class NameBeans {
 
 	public String rawDomain = "";	//要處理的檔案名稱，檔案格式只有domain name名稱
@@ -8,9 +10,26 @@ public class NameBeans {
 	public String bigramCFresult = "";
 	public String bigramCFToClustering = "";
 	
-	public Integer getMainDNIndex = 2;		//取最後倒數第二個，就是不娶tw,com,net，這個的前一個。www.google.com，只取google，直就給2
-	public Integer ngramLimit = 2; //給2是2-gram
-	public Integer cfItems = 5;	//推薦的個數
+	public Integer getMainDNIndex ;		//取最後倒數第二個，就是不娶tw,com,net，這個的前一個。www.google.com，只取google，直就給2
+	public Integer ngramLimit ; //給2是2-gram
+	public Integer cfItems ;	//推薦的個數
+
+	public JSONArray urlArr ;	//url list有答案的
+	public JSONArray bigramArr ;	//domain name 的 bigram
+	
+	
+	public JSONArray getUrlArr() {
+		return urlArr;
+	}
+	public void setUrlArr(JSONArray urlArr) {
+		this.urlArr = urlArr;
+	}
+	public JSONArray getBigramArr() {
+		return bigramArr;
+	}
+	public void setBigramArr(JSONArray bigramArr) {
+		this.bigramArr = bigramArr;
+	}
 	
 	public String getRawDomain() {
 		return rawDomain;

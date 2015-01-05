@@ -13,13 +13,13 @@ public class MergeAndGivenAns {
 	String dga = filePath + "raw/logs20141210_1221.txt.uniq";
 //	String normal = filePath + "raw/top-1m-onlyDomain.txt";
 	String normal = filePath + "raw/top-1m-takeout-sign.uniq";
-	String resultPath = filePath + "mergeToRaw/merge-1hNormal-2tenDga.txt";
+	String resultPath = filePath + "mergeToRaw/merge-1tNormal-2hDga.txt";
 	
 	BigramExpandMethod bem = new BigramExpandMethod();
 	
 	public static void main(String[] args) throws IOException {
-		int num_normal = 100;
-		int num_dga = 20;
+		int num_normal = 1000;
+		int num_dga = 200;
 		MergeAndGivenAns mag = new MergeAndGivenAns();
 		ArrayList<String> arr = new ArrayList<String>();
 		

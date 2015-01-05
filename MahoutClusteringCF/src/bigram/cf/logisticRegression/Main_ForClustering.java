@@ -20,8 +20,8 @@ public class Main_ForClustering {
 	BigramExpandMethod bem = new BigramExpandMethod();
 	Matrix toMatrix = null;
 
-	JSONArray urlArr = new JSONArray();
-	JSONArray bigramArr = new JSONArray();
+//	JSONArray urlArr = new JSONArray();
+//	JSONArray bigramArr = new JSONArray();
 	JSONObject domainAnsMap = new JSONObject();
 	
 	public void mainclass(NameBeans beans) throws IOException, JSONException {
@@ -30,15 +30,15 @@ public class Main_ForClustering {
 		
 		toMatrix = sparseMatrixToMatrixMarke(beans.getBigramCFresult());
 		
-		makeDictionaryList(beans.getDictionaryFilename());
+		makeDictionaryList(beans.getDictionaryFilename(),beans);
 		
 		String title = "";
-		for(int i=0; i<bigramArr.length();i++){
-			title=bigramArr.get(i)+","+title;
+		for(int i=0; i<beans.getBigramArr().length();i++){
+			title=beans.getBigramArr().get(i)+","+title;
 		}
 		title = title+"answer";
 		title = title.replace('-', '_');
-		domainAns(beans.getRawDomain());
+		domainAns(beans.getRawDomain(),beans);
 		bem.resultToWrite(beans.getBigramCFToClustering(), title);
 		for(int i=0;i<toMatrix.rows();i++){
 			String result = "";
@@ -50,7 +50,8 @@ public class Main_ForClustering {
 					result = result+","+values;
 				}
 			}
-			result = result+","+domainAnsMap.get((String) urlArr.get(i));
+//			result = result+","+domainAnsMap.get((String) urlArr.get(i));
+			result = result+","+domainAnsMap.get(beans.getUrlArr().getString(i));
 			bem.resultToWrite(beans.getBigramCFToClustering(), result);
 		}
 
@@ -60,23 +61,25 @@ public class Main_ForClustering {
                 new FileInputStream(path)));
 		return matrix;
 	}
-	void domainAns(String domanAnsPath) throws IOException, JSONException{
+	void domainAns(String domanAnsPath,NameBeans beans) throws IOException, JSONException{
 		BufferedReader br = new BufferedReader(new FileReader(domanAnsPath));
 		int i = 0;
 //		System.out.println(urlArr);
 		while(br.ready()){
-			domainAnsMap.put(urlArr.getString(i), br.readLine().split(",")[1]);
+//			domainAnsMap.put(urlArr.getString(i), br.readLine().split(",")[1]);
+			domainAnsMap.put(beans.getUrlArr().getString(i), br.readLine().split(",")[1]);
 			i++;
 		}
 	}
-	void makeDictionaryList(String dictionaryPath) throws IOException {
+	void makeDictionaryList(String dictionaryPath,NameBeans beans) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(dictionaryPath));
 		int i = 0;
 		while(br.ready()){
 			String line = br.readLine();
 			try{
 				if(i==1){
-					bigramArr = new JSONArray(line);
+					beans.setBigramArr( new JSONArray(line) );
+//					bigramArr = new JSONArray(line);
 //					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
 //					String[] strcom = lineRep.split(",");
 //					bigramArr = new JSONArray();
@@ -84,7 +87,8 @@ public class Main_ForClustering {
 //						bigramArr.put(strcom[j].replaceAll(" ", ""));
 //					}
 				}else if(i==4){
-					urlArr = new JSONArray(line);
+					beans.setUrlArr( new JSONArray(line) );
+//					urlArr = new JSONArray(line);
 //					String lineRep = StringUtils.substringBeforeLast(StringUtils.substringAfter(line, "[") , "]");
 //					String[] strcom = lineRep.split(",");
 //					urlArr = new JSONArray();
